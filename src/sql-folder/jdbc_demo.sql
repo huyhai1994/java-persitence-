@@ -8,6 +8,17 @@ create table users
     `email` varchar(255)
 );
 
+create table orders
+(
+    id      int primary key auto_increment,
+    user_id int,
+    amount  int,
+    foreign key (user_id) references users (id)
+);
+
+alter table orders
+    add column timestamp timestamp;
+
 insert into users (id, name, email)
 values (1, 'John Doe', 'john@example.com');
 -- Insert additional user records
@@ -30,3 +41,16 @@ VALUES (6, 'Emma Wilson', 'emma@example.com'),
 
 SELECT *
 FROM users;
+insert into orders (user_id, amount)
+values (3, 100);
+
+
+select *
+from users
+         inner join orders
+                    on users.id = orders.user_id;
+
+select *
+from users;
+
+show create table orders;
