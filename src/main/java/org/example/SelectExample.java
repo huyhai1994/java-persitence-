@@ -23,6 +23,7 @@ public class SelectExample {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
         }
     }
 }
