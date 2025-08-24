@@ -1,0 +1,16 @@
+# Source : https://search.brave.com/search?q=dockercompose++to+run+mysql+db&summary=1&conversation=f23998c5b3950f06278cc1
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=jdbc_demo
+      - MYSQL_USER=user1
+      - MYSQL_PASSWORD=pass
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  mysql_data:
