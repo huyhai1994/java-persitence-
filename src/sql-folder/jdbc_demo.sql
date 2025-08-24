@@ -11,5 +11,5 @@ create table users
 insert into users (id, name, email)
 values (1, 'John Doe', 'john@example.com');
 
-select *
-from users;
+SELECT *
+FROM users;
