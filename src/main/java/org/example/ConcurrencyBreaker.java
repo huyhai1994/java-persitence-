@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.concurrent.*;
 
 public class ConcurrencyBreaker {
-    private static final int THREAD_COUNT = 2000;
+    private static final int THREAD_COUNT = 200;
 
     public static void main(String[] args) {
         ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
@@ -59,7 +59,6 @@ public class ConcurrencyBreaker {
 
                 // Sleep to increase chance of conflict
                 Thread.sleep(ThreadLocalRandom.current().nextInt(100, 500));
-
                 stmt.executeUpdate();
 
                 // Random commit or rollback
@@ -73,6 +72,8 @@ public class ConcurrencyBreaker {
             } catch (InterruptedException e) {
                 conn.rollback();
                 Thread.currentThread().interrupt();
+            } finally {
+                conn.close();
             }
         }
     }
@@ -101,6 +102,8 @@ public class ConcurrencyBreaker {
                 printResults(rs2, "Second read by thread " + threadId);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
+            } finally {
+                conn.close();
             }
         }
     }
