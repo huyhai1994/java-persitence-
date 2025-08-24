@@ -6,8 +6,13 @@ public class Application {
     private static Connection connection;
 
     public static void main(String[] args) throws SQLException {
-        openDatabaseConnection();
-        closeDatabaseConnection();
+        try {
+            openDatabaseConnection();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        } finally {
+            closeDatabaseConnection();
+        }
     }
 
     private static void openDatabaseConnection() throws SQLException {
